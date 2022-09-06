@@ -11,6 +11,6 @@ public class HelloController {
     @RequestMapping(value = "/hello")
     @ResponseBody
     public Object hello(){
-        return "hello jenkins! docker!";
+        return "hello jenkins! docker! tag v1.2.0";
     }
 }
