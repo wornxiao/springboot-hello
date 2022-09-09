@@ -3,9 +3,9 @@ pipeline{
     agent any
     //声明全局变量
     environment {
-        harbor_name = 'admin',
-        harbor_pass ='Harbor12345',
-        harbor_addr = '192.168.189.129:8081',
+        harbor_name = 'admin'
+        harbor_pass ='Harbor12345'
+        harbor_addr = '192.168.189.129:8081'
         harbor_repo = 'wornxiao'
     }
 
