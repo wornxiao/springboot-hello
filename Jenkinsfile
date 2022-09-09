@@ -9,7 +9,7 @@ pipeline{
     stages{
        stage('拉取git仓库代码'){
           steps{
-	          checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/wornxiao/springboot-hello.git']]])
+	          checkout([$class: 'GitSCM', branches: [[name: '${tag}']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/wornxiao/springboot-hello.git']]])
 	      }
        }
        stage('通过maven构建项目'){
