@@ -4,9 +4,9 @@ pipeline{
     //声明全局变量
     environment {
         harbor_name = 'admin',
-	harbor_pass ='Harbor12345',
-	harbor_addr = '192.168.189.129:8081',
-	harbor_repo = 'wornxiao'	
+        harbor_pass ='Harbor12345',
+        harbor_addr = '192.168.189.129:8081',
+        harbor_repo = 'wornxiao'
     }
 
     stages{
@@ -40,7 +40,8 @@ docker push ${harbor_addr}:${harbor_repo}:${JOB_NAME}:${tag}'''
        }
        stage('通过Publish Over SSH 通知目标主机'){
           steps{
-            echo '通过Publish Over SSH 通知目标主机'
+            sshPublisher(publishers: [sshPublisherDesc(configName: 'app_host', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''cd /data/app
+            ./deploy.sh  $harbor_addr $harbor_repo $JOB_NAME $tag $host_port $container_port''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
           }
        }
     }
