@@ -3,7 +3,10 @@ pipeline{
     agent any
     //声明全局变量
     environment {
-        key = 'value'
+        harbor_name = 'admin',
+	harbor_pass ='Harbor12345',
+	harbor_addr = '192.168.189.129:8081',
+	harbor_repo = 'wornxiao'	
     }
 
     stages{
@@ -30,7 +33,9 @@ docker build -t ${JOB_NAME}$tag '''
        }
        stage('将自定义对象推送到harbor仓库中'){
           steps{
-            echo '将自定义对象推送到harbor仓库中'
+		  sh '''docker login -u ${harbor_name} -p ${harbor_pass} ${harbor_addr}
+docker tag ${JOB_NAME}:${tag}  ${harbor_addr}:${harbor_repo}:${JOB_NAME}:${tag}
+docker push ${harbor_addr}:${harbor_repo}:${JOB_NAME}:${tag}'''
           }
        }
        stage('通过Publish Over SSH 通知目标主机'){
