@@ -40,8 +40,7 @@ docker push ${harbor_addr}/${harbor_repo}/${JOB_NAME}:${tag}'''
        }
        stage('通过Publish Over SSH 通知目标主机'){
           steps{
-            sshPublisher(publishers: [sshPublisherDesc(configName: 'app_host', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: " cd /data/app
-            ./deploy.sh  $harbor_addr $harbor_repo $JOB_NAME $tag $host_port $container_port ", execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+            sshPublisher(publishers: [sshPublisherDesc(configName: 'app_host', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: "cd /data/app./deploy.sh $harbor_addr $harbor_repo $JOB_NAME $tag $host_port $container_port", execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
           }
        }
     }
