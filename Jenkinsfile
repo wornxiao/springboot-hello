@@ -28,7 +28,7 @@ pipeline{
        stage('通过docker制作自定义镜像'){
           steps{
            sh '''mv target/*.jar ./docker
-docker build -t ${JOB_NAME}:$tag /docker '''
+docker build -t ${JOB_NAME}:$tag docker '''
           }
        }
        stage('将自定义对象推送到harbor仓库中'){
