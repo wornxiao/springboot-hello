@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: hello-pipline
-          image: 192.168.189.129:8081/wornxiao/hello-pipline:v3.0.1
+          image: 192.168.189.129:8081/wornxiao/hello-pipline:v6.0.0
           ports:
             - containerPort: 80
 ---

@@ -11,6 +11,6 @@ public class HelloController {
     @RequestMapping(value = "/hello")
     @ResponseBody
     public Object hello(){
-        return "hello docker! 结束了!";
+        return "hello docker! v6.0.0 !";
     }
 }

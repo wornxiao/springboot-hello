@@ -38,9 +38,14 @@ docker tag ${JOB_NAME}:${tag}  ${harbor_addr}/${harbor_repo}/${JOB_NAME}:${tag}
 docker push ${harbor_addr}/${harbor_repo}/${JOB_NAME}:${tag}'''
           }
        }
-       stage('通过Publish Over SSH 通知目标主机'){
+       stage('将yml文件 上传到k8s集群主机'){
           steps{
              sshPublisher(publishers: [sshPublisherDesc(configName: 'k8s', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'pipeline.yml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+          }
+       }
+       stage('远程交付yml资源到k8s集群'){
+          steps{
+           sh 'ssh root@192.168.189.131 kubectl apply -f /usr/local/k8s/pipeline.yml'
           }
        }
      }
