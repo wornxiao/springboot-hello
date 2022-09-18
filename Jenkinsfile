@@ -35,7 +35,7 @@ docker build -t ${JOB_NAME}:$tag docker '''
           steps{
 		  sh '''docker login -u ${harbor_name} -p ${harbor_pass} ${harbor_addr}
 docker tag ${JOB_NAME}:${tag}  ${harbor_addr}/${harbor_repo}/${JOB_NAME}:${tag}
-docker push ${harbor_addr}/${harbor_repo}/${JOB_NAME}:${tag}'''
+docker push ${harbor_addr}/${harbor_repo}/${JOB_NAME}:${tag} docker image prune -f'''
           }
        }
        stage('将yml文件 上传到k8s集群主机'){
